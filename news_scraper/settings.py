@@ -130,6 +130,13 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-# CELERY
+# Celery
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
+
+CELERY_BEAT_SCHEDULE = {
+    "Scraper": {
+        'task': 'core.tasks.scrape_dev_to',
+        'schedule': 10
+    }
+}
