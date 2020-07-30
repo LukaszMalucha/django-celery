@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_beat',
+    # 'django_celery_beat',
     'core'
 ]
 
@@ -134,9 +134,9 @@ STATICFILES_DIRS = (
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
-CELERY_BEAT_SCHEDULE = {
-    "Scraper": {
-        'task': 'core.tasks.scrape_dev_to',
-        'schedule': 10
-    }
-}
+# CELERY_BEAT_SCHEDULE = {
+#     "Scraper": {
+#         'task': 'core.tasks.scrape_dev_to',
+#         'schedule': 20
+#     }
+# }

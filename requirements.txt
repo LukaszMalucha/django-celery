@@ -1,11 +1,10 @@
-beautifulsoup4==4.6.0
+selenium==3.141.0
 Celery==4.4.6
-Django==2.2
+Django==2.2.13
 djangorestframework==3.11.0
 django-allauth==0.40.0
 django-celery-beat==2.0.0
 dj-rest-auth==1.1.0
 django-webpack-loader==0.6.0
-rabbitmq==0.2.0
+flower==0.9.5
 redis==3.5.3
-requests==2.21.0

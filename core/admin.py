@@ -1,5 +1,14 @@
 from django.contrib import admin
-from core.models import NewsItem
+from core.models import NewsItem, ScrapeRecord
 
 
-admin.site.register(NewsItem)
+class NewsItemAdmin(admin.ModelAdmin):
+    list_display = [
+        'source',
+        'link',
+        'title',
+        'created',
+    ]
+
+admin.site.register(NewsItem, NewsItemAdmin)
+admin.site.register(ScrapeRecord)
