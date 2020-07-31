@@ -78,16 +78,27 @@ WSGI_APPLICATION = 'news_scraper.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-if "DATABASE_URL" in os.environ:
-    DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
-else:
-    print("No postgres detected. Using sqlite3 instead.")
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
+# if "DATABASE_URL" in os.environ:
+#     DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
+# else:
+#     print("No postgres detected. Using sqlite3 instead.")
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#         }
+#     }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("NAME"),
+        "USER": os.environ.get("USER"),
+        "PASSWORD": os.environ.get("PASSWORD"),
+        "HOST": os.environ.get("HOST"),
+        "PORT": os.environ.get("PORT")
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -132,11 +143,15 @@ STATICFILES_DIRS = (
 
 # Celery
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 
-# CELERY_BEAT_SCHEDULE = {
-#     "Scraper": {
-#         'task': 'core.tasks.scrape_dev_to',
-#         'schedule': 20
-#     }
-# }
+CELERY_BEAT_SCHEDULE = {
+    "Scraper": {
+        'task': 'core.tasks.scrape_dev_to',
+        'schedule': crontab(minute="*/2")
+    }
+}
+
+# FOR REDIRECTING
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
