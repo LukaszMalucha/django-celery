@@ -1,4 +1,4 @@
-## Django + Celery
+## Django + Celery Deployment
 
 
 ### FOUR TERMINALS
