@@ -39,3 +39,5 @@ Variable value: 1
 
 ##### Redis CLI
 redis-cli
+
+#### Caprover
